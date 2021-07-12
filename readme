@@ -12,7 +12,7 @@ La arquitectura de la api está basada en arquitectura Rest. Sus principales ven
 3. Fiabilidad, escalabilidad, flexibilidad
 
 Para el desarrollo de la api se ha utilizado java + Spring boot por ser tecnologías bien conocidas y estandars del mercado.
-Para el desarrllo de la segurida y autenticación se ha hecho uso de sprgin security
+Para el desarrllo de la segurida y autenticación se ha hecho uso de sprging security
 
 
 Accesso a la Api:
