@@ -1,0 +1,72 @@
+Para lanzar la api es necesario compilar el proyecto, para esto lanzaremos el comando maven para instalar el jar ejecutable
+-mvn package install
+para ejectura el jar
+-java -jar Safebox-1.0.0.jar
+
+
+Dependencias técnicas y arquitectura del proyector
+
+La arquitectura de la api está basada en arquitectura Rest. Sus principales ventajas son:
+1. separación cliente/servidor
+2. Independencia de tecnologías / lenguajes
+3. Fiabilidad, escalabilidad, flexibilidad
+
+Para el desarrollo de la api se ha utilizado java + Spring boot por ser tecnologías bien conocidas y estandars del mercado.
+Para el desarrllo de la segurida y autenticación se ha hecho uso de sprgin security
+
+
+Accesso a la Api:
+
+***  ***
+petición post: http://localhost:8080/safebox 
+con body:
+		 -name: nombre de la safebox
+		 -password: password de acceso
+		 
+La petición devuelve el id generado de la safebox
+Ejemplo:
+ http://localhost:8080/safebox
+body {	
+	    "name":"safebox1",
+	    "password":"safeBox1*"	
+	}
+resultado: e848e58f-b474-478b-96b9-a0936c2cfa9a
+
+
+*** Open Safebox ******
+peticion get: http://localhost:8080/safebox/open
+id: id safebox
+password : pass safebox
+resultado devuleve un token para esa safebox con validez de 3 minutos, tanto en el campo header como en el body.
+
+ejemplo
+http://localhost:8080/safebox/open?id=e848e58f-b474-478b-96b9-a0936c2cfa9a&password=safeBox1*
+resultado:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYWZlYm94MSIsImF1ZCI6InNhZmUtYm94IiwiaWF0IjoxNjIzMTc2NDY1LCJleHAiOjE2MjMxNzgyNjV9._VIoZ-EDx5XcmrB0Jaz_AKxp-MWUDTkeqgV-AHYpVzpwbaJEH-yVCvWjeW7B-UeHey3S7DRABz1Bm6wpbgL-WQ
+
+
+**** añadir contenido a safebox ****
+petición put: http://localhost:8080/items/{id}
+id: id safebox
+header authorization: debe contener el token de esta safebox
+Body: lista de items a añadir
+resultado: 200 ok
+ejemplo: 
+http://localhost:8080/items/2531ea67-3d86-4cfe-a393-eff1e615cccd
+(header) Authorization : Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYWZlYm94MSIsImF1ZCI6InNhZmUtYm94IiwiaWF0IjoxNjIzMTc2NDY1LCJleHAiOjE2MjMxNzgyNjV9._VIoZ-EDx5XcmrB0Jaz_AKxp-MWUDTkeqgV-AHYpVzpwbaJEH-yVCvWjeW7B-UeHey3S7DRABz1Bm6wpbgL-WQ
+body: ["item1","item2"]
+
+**** ver contenido safebox ***
+petición get: http://localhost:8080/items
+header authorization: debe contener el token de esta safebox
+resultado: lista de items
+ejemplo: 
+http://localhost:8080/items
+(header) Authorization : Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYWZlYm94MSIsImF1ZCI6InNhZmUtYm94IiwiaWF0IjoxNjIzMTc2NDY1LCJleHAiOjE2MjMxNzgyNjV9._VIoZ-EDx5XcmrB0Jaz_AKxp-MWUDTkeqgV-AHYpVzpwbaJEH-yVCvWjeW7B-UeHey3S7DRABz1Bm6wpbgL-WQ
+-item1
+-item2
+
+
+
+
+
+
